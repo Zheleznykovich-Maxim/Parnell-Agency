@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px; /* Пример равного отступа снизу таблицы */
+}
+body {
+    font-size: 23px;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+form {
+    max-width: 400px;
+
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"] {
+    padding: 6px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+form input[type="submit"],
+form input[type="button"] {
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
