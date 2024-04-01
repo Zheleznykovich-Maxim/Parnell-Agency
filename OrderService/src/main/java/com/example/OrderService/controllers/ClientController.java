@@ -1,11 +1,13 @@
 package com.example.OrderService.controllers;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import com.example.OrderService.models.Client;
 import com.example.OrderService.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -30,5 +32,38 @@ public class ClientController {
     public String createClient(Client client) {
         clientService.createClient(client);
         return "redirect:/clients";
+    }
+
+    @GetMapping("/client-update/{id}")
+    public String updateClientForm(@PathVariable("id") int id, Model model) {
+        Client client = clientService.findById(id);
+        model.addAttribute("client", client);
+        return "client-update";
+    }
+
+    @PostMapping("/client-update")
+    public String updateClient(Client client) {
+        clientService.createClient(client);
+        return "redirect:/clients";
+    }
+
+    @GetMapping("/client-delete/{id}")
+    public String deleteClient(@PathVariable("id") int id) {
+        clientService.deleteById(id);
+        return "redirect:/clients";
+    }
+
+//    @GetMapping("/client-search/{id}")
+//    public String searchClient(@PathVariable("id") int id) {
+//        Client client = clientService.findById(id);
+//
+//    }
+
+    @GetMapping("/client-search")
+    public String searchClient(@Param("searchValue") String searchValue, Model model) {
+        List<Client> clients = (List<Client>) clientService.search(searchValue);
+        model.addAttribute("clients", clients);
+        model.addAttribute("searchValue", searchValue);
+        return "index";
     }
 }

@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+<form action="#" th:action="@{/client-search}" id="searchIdForm" method="get">
+    <label for="searchIdInput">Search by ID</label>
+    <input type="text" id="searchIdInput" name="searchValue" th:value="${searchValue}" required>
+    <input type="submit" value="Search">
+    <input type="button" value="Clear" onclick="refresh()">
+</form>
 <div th:switch="${clients}">
     <h2 th:case="null">No clients found!</h2>
 
@@ -16,7 +22,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Order</th>
+                <th>Case description</th>
                 <th>PhoneNumber</th>
                 <th>Username</th>
                 <th>Password</th>
@@ -30,13 +36,21 @@
                 <td th:text="${client.phone_number}"></td>
                 <td th:text="${client.username}"></td>
                 <td th:text="${client.password}"></td>
-                <td><a th:href="@{book-update/{id}(id=${client.id})}">Edit</a></td>
-                <td><a th:href="@{book-delete/{id}(id=${client.id})}">Delete</a></td>
+                <td><a th:href="@{client-update/{id}(id=${client.id})}">Edit</a></td>
+                <td><a th:href="@{client-delete/{id}(id=${client.id})}">Delete</a></td>
             </tr>
             </tbody>
+            <p th:text="${#lists.size(clients)}">Length</p>
         </table>
+
     </div>
     <p><a href="/client-create">Create book</a></p>
 </div>
 </body>
+<script>
+    function refresh() {
+        console.log("hi");
+        window.location.href = "http://localhost:8080/clients";
+    }
+</script>
 </html>
