@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Investigations</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<form action="#" th:action="@{/invest-search}" id="searchIdForm" method="get">
+    <label for="searchIdInput">Search by ID</label>
+    <input type="text" id="searchIdInput" name="searchValue" th:value="${searchValue}" required>
+    <input type="submit" value="Search">
+    <input type="button" value="Clear" onclick="refresh()">
+</form>
+<div th:switch="${invests}">
+    <h2 th:case="null">No investigations found!</h2>
+
+    <div th:case="*">
+        <h2>Invests</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Specification</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="invest : ${invests}">
+                <td th:text="${invest.id}"></td>
+                <td th:text="${invest.specification}"></td>
+                <td th:text="${invest.status}"></td>
+                <td><a th:href="@{invest-update/{id}(id=${invest.id})}">Edit</a></td>
+                <td><a th:href="@{invest-delete/{id}(id=${invest.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+            <p th:text="${#lists.size(invests)}">Length</p>
+        </table>
+
+    </div>
+    <p><a href="/invest-create">Create investigation</a></p>
+</div>
+</body>
+<script>
+    function refresh() {
+        console.log("hi");
+        window.location.href = "http://localhost:8080/invests";
+    }
+</script>
+</html>

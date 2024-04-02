@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create client</title>
+    <link rel="stylesheet" href="../form.css">
+</head>
+<body>
+<form action="#" th:action="@{/invest-update}" th:object="${investigation}" method="post">
+    <label for="id">ID</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+    <label for="specification">Specification</label>
+    <textarea id="specification" th:field="*{specification}" rows="10" cols="60" placeholder="Specification"></textarea>
+    <label for="status">Status</label>
+    <select th:field="*{status}" id="status">
+        <option value="OPEN">OPEN</option>
+        <option value="CLOSED">CLOSED</option>
+        <option value="IN_PROCESS">IN PROCESS</option>
+    </select>
+
+    <input type="submit" value="Create investigation">
+</form>
+</body>
+</html>

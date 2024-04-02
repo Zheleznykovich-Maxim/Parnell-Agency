@@ -20,12 +20,12 @@ public class ClientController {
     public String findAll(Model model) {
         List<Client> clients = (List<Client>) clientService.findAll();
         model.addAttribute("clients", clients);
-        return "index";
+        return "client/client-index";
     }
 
     @GetMapping("/client-create")
     public String createClientForm(Client client) {
-        return "client-create";
+        return "client/client-create";
     }
 
     @PostMapping("/client-create")
@@ -38,7 +38,7 @@ public class ClientController {
     public String updateClientForm(@PathVariable("id") int id, Model model) {
         Client client = clientService.findById(id);
         model.addAttribute("client", client);
-        return "client-update";
+        return "client/client-update";
     }
 
     @PostMapping("/client-update")
@@ -64,6 +64,6 @@ public class ClientController {
         List<Client> clients = (List<Client>) clientService.search(searchValue);
         model.addAttribute("clients", clients);
         model.addAttribute("searchValue", searchValue);
-        return "index";
+        return "client/client-index";
     }
 }
