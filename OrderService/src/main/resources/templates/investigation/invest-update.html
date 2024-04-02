@@ -11,6 +11,8 @@
     <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
     <label for="specification">Specification</label>
     <textarea id="specification" th:field="*{specification}" rows="10" cols="60" placeholder="Specification"></textarea>
+    <label for="client">Client ID</label>
+    <input type="text" th:field="*{client}" id="client" placeholder="Client id">
     <label for="status">Status</label>
     <select th:field="*{status}" id="status">
         <option value="OPEN">OPEN</option>

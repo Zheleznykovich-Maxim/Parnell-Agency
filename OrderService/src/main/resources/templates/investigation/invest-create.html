@@ -9,6 +9,8 @@
 <form action="#" th:action="@{/invest-create}" th:object="${investigation}" method="post">
     <label for="specification">Specification</label>
     <textarea id="specification" th:field="*{specification}" rows="10" cols="60" placeholder="Specification"></textarea>
+    <label for="client">Client ID</label>
+    <input type="text" th:field="*{client}" id="client" placeholder="Client id">
     <select th:field="*{status}" id="status">
         <option value="OPEN">OPEN</option>
         <option value="CLOSED">CLOSED</option>
