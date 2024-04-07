@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create finance</title>
+    <link rel="stylesheet" href="../form.css">
+</head>
+<body>
+<form action="#" th:action="@{/finance-create}" th:object="${finance}" method="post">
+    <label for="id">ID</label>
+<!--    <input type="number" th:field="*{investigation}" id="id" placeholder="ID">-->
+    <select th:field="*{investigation}" id="id">
+        <option th:each="invest : ${invests}" th:value="${invest.id}" th:text="${invest.id}"></option>
+    </select>
+    <label for="case_cost">Case cost</label>
+    <input type="text" th:field="*{case_cost}" id="case_cost" placeholder="Name">
+    <label for="payment_method">Payment method</label>
+    <select th:field="*{payment_method}" id="payment_method">
+        <option value="CRYPT">CRYPT</option>
+        <option value="CASH">CASH</option>
+        <option value="CARD">CARD</option>
+    </select>
+    <label for="payment_status">Payment status</label>
+    <select th:field="*{payment_status}" id="payment_status">
+        <option value="PAID">PAID</option>
+        <option value="PENDING">PENDING</option>
+        <option value="FAILED">FAILED</option>
+    </select>
+    <label for="recipient_account">Recipient account</label>
+    <input type="text" th:field="*{recipient_account}" id="recipient_account" placeholder="Recipient account">
+    <input type="submit" value="Create finance">
+</form>
+</body>
+</html>

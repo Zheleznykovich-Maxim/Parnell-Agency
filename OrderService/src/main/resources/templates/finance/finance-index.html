@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Finance</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<form action="#" th:action="@{/finance-search}" id="searchIdForm" method="get">
+    <label for="searchIdInput">Search by ID</label>
+    <input type="text" id="searchIdInput" name="searchValue" th:value="${searchValue}" required>
+    <input type="submit" value="Search">
+    <input type="button" value="Clear" onclick="refresh()">
+</form>
+<div th:switch="${finance}">
+    <h2 th:case="null">No finance found!</h2>
+
+    <div th:case="*">
+        <h2>Finance</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Case cost</th>
+                <th>Date</th>
+                <th>Payment method</th>
+                <th>Payment status</th>
+                <th>Recipient account</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="fin : ${finance}">
+                <td th:text="${fin.id}"></td>
+                <td th:text="${fin.case_cost}"></td>
+                <td th:text="${fin.date}"></td>
+                <td th:text="${fin.payment_method}"></td>
+                <td th:text="${fin.payment_status}"></td>
+                <td th:text="${fin.recipient_account}"></td>
+                <td><a th:href="@{finance-update/{id}(id=${fin.id})}">Edit</a></td>
+                <td><a th:href="@{finance-delete/{id}(id=${fin.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+            <p th:text="${#lists.size(finance)}">Length</p>
+        </table>
+
+    </div>
+    <p><a href="/finance-create">Create finance</a></p>
+</div>
+</body>
+<script>
+    function refresh() {
+        console.log("hi");
+        window.location.href = "http://localhost:8080/finance";
+    }
+</script>
+</html>

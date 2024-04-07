@@ -18,7 +18,8 @@
 		<module>OrderService</module>
 		<module>AgentService</module>
 		<module>FinanceService</module>
-	</modules>
+        <module>PaymentService</module>
+    </modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
