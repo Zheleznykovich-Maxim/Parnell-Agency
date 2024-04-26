@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update agent</title>
+    <link rel="stylesheet" href="../form.css">
+</head>
+<body>
+<form action="#" th:action="@{/agent-update}" th:object="${agent}" method="post">
+    <label for="id">ID</label>
+    <input readonly type="number" th:field="*{ID_agent}" id="id" placeholder="ID">
+    <label for="username">Username</label>
+    <input type="text" th:field="*{username}" id="username" placeholder="Username">
+    <label for="prof_experience">Prof. experience</label>
+    <input type="number" th:field="*{prof_experience}" id="prof_experience" placeholder="Prof. experience">
+    <label for="agent_role">Role</label>
+    <select th:field="*{agent_role}" id="agent_role">
+        <option value="DETECTIVE_EL">DETECTIVE_EL</option>
+        <option value=" DETECTIVE_S"> DETECTIVE_S</option>
+        <option value="DETECTIVE_L">DETECTIVE_L</option>
+        <option value="CHIEF">CHIEF</option>
+    </select>
+    <input type="submit" value="Update agent">
+</form>
+</body>
+</html>

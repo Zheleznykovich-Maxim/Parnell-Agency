@@ -31,7 +31,7 @@
                 <td th:text="${invest.id}"></td>
                 <td th:text="${invest.specification}"></td>
                 <td th:text="${invest.status}"></td>
-                <td th:text="${invest.client}"></td>
+                <td th:text="${invest.client?.name}"></td>
                 <td><a th:href="@{invest-update/{id}(id=${invest.id})}">Edit</a></td>
                 <td><a th:href="@{invest-delete/{id}(id=${invest.id})}">Delete</a></td>
             </tr>

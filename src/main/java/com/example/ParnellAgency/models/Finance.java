@@ -9,13 +9,13 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "finance")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "payment")
 public class Finance {
 
     @Id
-    @Column(name = "investigation_id")
+    @Column(name = "ID_investigation")
     private int id;
 
     @Temporal(TemporalType.TIMESTAMP)

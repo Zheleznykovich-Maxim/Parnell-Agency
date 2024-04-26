@@ -10,7 +10,7 @@ import lombok.Data;
 public class Investigation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID_investigation")
     private int id;
     private String specification;
     @Enumerated(EnumType.STRING)
@@ -26,4 +26,6 @@ public class Investigation {
     private Finance finance;
 
 }
+
+
 

@@ -2,11 +2,14 @@ package com.example.ParnellAgency.services;
 
 import com.example.ParnellAgency.models.Investigation;
 import com.example.ParnellAgency.repositories.InvestigationRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
 @AllArgsConstructor
+@Validated
 public class InvestigationService {
     private final InvestigationRepository investigationRepository;
 
@@ -14,7 +17,7 @@ public class InvestigationService {
         return investigationRepository.findAll();
     }
 
-    public void createInvestigation(Investigation investigation) {
+    public void createInvestigation(@Valid Investigation investigation) {
         investigationRepository.save(investigation);
     }
 

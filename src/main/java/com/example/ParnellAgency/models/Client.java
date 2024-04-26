@@ -9,6 +9,7 @@ import lombok.Data;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_client")
     private int id;
     private String name;
     private String case_description;
