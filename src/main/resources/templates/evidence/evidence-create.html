@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create evidence</title>
+    <link rel="stylesheet" href="../form.css">
+</head>
+<body>
+<form action="#" th:action="@{/evidence-create}" th:object="${evidence}" method="post">
+    <select th:field="*{agentInvestigation}" id="id">
+        <option th:each="agent_invest : ${agent_invests}" th:value="${agent_invest.ID_agent_investigation}"
+                th:text="${agent_invest.ID_agent_investigation}"></option>
+    </select>
+    <select th:field="*{evidence_type}" id="role">
+        <option value="BIO">BIO</option>
+        <option value="TESTIMONY">TESTIMONY</option>
+        <option value="MEDIA">MEDIA</option>
+        <option value="ITEM">ITEM</option>
+    </select>
+    <label for="description">Description</label>
+    <input type="text" th:field="*{description}" id="description" placeholder="Description">
+    <input type="submit" value="Create evidence">
+</form>
+</body>
+</html>

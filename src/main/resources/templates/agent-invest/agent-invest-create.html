@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Agent-Investigation</title>
+    <link rel="stylesheet" href="../form.css">
+</head>
+<body>
+<form action="#" th:action="@{/agent-invest-create}" th:object="${agentInvestigation}" method="post">
+    <label for="ID_agent">Agent ID</label>
+    <input type="number" th:field="*{agent.ID_agent}" id="ID_agent" placeholder="Agent ID">
+    <label for="ID_investigation">Investigation ID</label>
+    <input type="number" th:field="*{investigation.id}" id="ID_investigation" placeholder="Investigation ID">
+    <input type="submit" value="Create agent-investigation">
+</form>
+</body>
+</html>

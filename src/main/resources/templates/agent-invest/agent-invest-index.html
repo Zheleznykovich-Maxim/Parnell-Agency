@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent-Invests</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<form action="#" th:action="@{/agent-invest-search}" id="searchIdForm" method="get">
+    <label for="searchIdInput">Search by fields</label>
+    <input type="number" id="searchIdInput" name="searchValue" th:value="${searchValue}" required>
+    <input type="submit" value="Search">
+    <input type="button" value="Clear" onclick="refresh()">
+</form>
+<div th:switch="${agent_invests}">
+    <h2 th:case="null">No agent-invests found!</h2>
+
+    <div th:case="*">
+        <h2>Agents</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Agent ID</th>
+                <th>Investigation ID</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="agent_invest : ${agent_invests}">
+                <td th:text="${agent_invest.ID_agent_investigation}"></td>
+                <td th:text="${agent_invest.agent.ID_agent}"></td>
+                <td th:text="${agent_invest.investigation.id}"></td>
+                <td><a th:href="@{agent-invest-update/{id}(id=${agent_invest.ID_agent_investigation})}">Edit</a></td>
+                <td><a th:href="@{agent-invest-delete/{id}(id=${agent_invest.ID_agent_investigation})}">Delete</a></td>
+            </tr>
+            </tbody>
+            <p th:text="${#lists.size(agent_invests)}">Length</p>
+        </table>
+
+    </div>
+    <p><a href="/agent-invest-create">Create agent-invest</a></p>
+</div>
+</body>
+<script>
+    function refresh() {
+        console.log("hi");
+        window.location.href = "http://localhost:8080/agent-invests";
+    }
+</script>
+</html>
