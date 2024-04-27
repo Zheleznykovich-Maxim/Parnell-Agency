@@ -1,9 +1,7 @@
 package com.example.ParnellAgency.services;
 
-import com.example.ParnellAgency.models.Agent;
-import com.example.ParnellAgency.models.Client;
+
 import com.example.ParnellAgency.models.Evidence;
-import com.example.ParnellAgency.repositories.ClientRepository;
 import com.example.ParnellAgency.repositories.EvidenceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

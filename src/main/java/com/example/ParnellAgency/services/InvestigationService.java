@@ -9,15 +9,15 @@ import org.springframework.validation.annotation.Validated;
 
 @Service
 @AllArgsConstructor
-@Validated
 public class InvestigationService {
+
     private final InvestigationRepository investigationRepository;
 
     public Iterable<Investigation> findAll() {
         return investigationRepository.findAll();
     }
 
-    public void createInvestigation(@Valid Investigation investigation) {
+    public void createInvestigation(Investigation investigation) {
         investigationRepository.save(investigation);
     }
 

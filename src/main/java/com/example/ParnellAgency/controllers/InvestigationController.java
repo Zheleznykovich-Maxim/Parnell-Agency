@@ -1,9 +1,12 @@
 package com.example.ParnellAgency.controllers;
 
+import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.models.Investigation;
 import com.example.ParnellAgency.services.InvestigationService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -16,7 +19,8 @@ public class InvestigationController {
     private final InvestigationService investigationService;
 
     @GetMapping("/invests")
-    private String findAll(Model model) {
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String findAll(Model model) {
         List<Investigation> investigationList = (List<Investigation>) investigationService.findAll();
         model.addAttribute("invests", investigationList);
         return "investigation/invest-index";
@@ -34,26 +38,26 @@ public class InvestigationController {
     }
 
     @GetMapping("/invest-update/{id}")
-    private String updateInvestigationForm(@PathVariable("id") int id, Model model) {
+    public String updateInvestigationForm(@PathVariable("id") int id, Model model) {
         Investigation investigation = investigationService.findById(id);
         model.addAttribute("investigation", investigation);
         return "investigation/invest-update";
     }
 
     @PostMapping("/invest-update")
-    private String updateInvestigation(Investigation investigation) {
+    public String updateInvestigation(Investigation investigation) {
         investigationService.createInvestigation(investigation);
         return "redirect:/invests";
     }
 
     @GetMapping("/invest-delete/{id}")
-    private String deleteInvest(@PathVariable("id") int id) {
+    public String deleteInvest(@PathVariable("id") int id) {
         investigationService.deleteById(id);
         return "redirect:/invests";
     }
 
     @GetMapping("/invest-search")
-    private String searchInvest(@Param("searchValue") String searchValue, Model model) {
+    public String searchInvest(@Param("searchValue") String searchValue, Model model) {
         List<Investigation> investigationList = (List<Investigation>) investigationService.search(searchValue);
         model.addAttribute("invests", investigationList);
         model.addAttribute("searchValue", searchValue);

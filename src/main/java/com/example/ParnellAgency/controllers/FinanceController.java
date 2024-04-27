@@ -20,46 +20,46 @@ public class FinanceController {
     private final FinanceService financeService;
     private  final InvestigationService investigationService;
     @GetMapping("/finance")
-    private String findAll(Model model) {
+    public String findAll(Model model) {
         List<Finance> financeList = (List<Finance>) financeService.findAll();
         model.addAttribute("finance", financeList);
         return "finance/finance-index";
     }
 
     @GetMapping("/finance-create")
-    private String createFinanceForm(Finance finance, Model model) {
+    public String createFinanceForm(Finance finance, Model model) {
         List<Investigation> investigationList = (List<Investigation>) investigationService.findAll();
         model.addAttribute("invests", investigationList);
         return "finance/finance-create";
     }
 
     @PostMapping("/finance-create")
-    private String createFinance(Finance finance) {
+    public String createFinance(Finance finance) {
         financeService.createFinance(finance);
         return "redirect:/finance";
     }
 
     @GetMapping("finance-update/{id}")
-    private String updateFinanceForm(@PathVariable("id") int id, Model model) {
+    public String updateFinanceForm(@PathVariable("id") int id, Model model) {
         Finance finance = financeService.findById(id);
         model.addAttribute("finance", finance);
         return "finance/finance-update";
     }
 
     @PostMapping("/finance-update")
-    private String updateFinance(Finance finance) {
+    public String updateFinance(Finance finance) {
         financeService.createFinance(finance);
         return "redirect:/finance";
     }
 
     @GetMapping("/finance-delete/{id}")
-    private String deleteFinance(@PathVariable("id") int id) {
+    public String deleteFinance(@PathVariable("id") int id) {
         financeService.deleteById(id);
         return "redirect:/finance";
     }
 
     @GetMapping("/finance-search")
-    private String searchFiance(@Param("searchValue") String searchValue, Model model) {
+    public String searchFiance(@Param("searchValue") String searchValue, Model model) {
         List<Finance> finances = (List<Finance>) financeService.search(searchValue);
         model.addAttribute("finance", finances);
         model.addAttribute("searchValue", searchValue);

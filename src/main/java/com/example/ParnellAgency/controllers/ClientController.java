@@ -1,6 +1,7 @@
 package com.example.ParnellAgency.controllers;
 
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.services.ClientService;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ClientController {
     private final ClientService clientService;
     @GetMapping("/clients")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String findAll(Model model) {
         List<Client> clients = (List<Client>) clientService.findAll();
         model.addAttribute("clients", clients);
