@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa;
+    color: #343a40;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.small-text {
+    font-size: 14px; /* Задайте желаемый размер шрифта */
+}
