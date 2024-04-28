@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Clients</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <form action="#" th:action="@{/client-search}" id="searchIdForm" method="get">
@@ -31,11 +31,10 @@
             <tbody>
             <tr th:each="client : ${clients}">
                 <td th:text="${client.id}"></td>
+                <td th:text="${client.email}"></td>
                 <td th:text="${client.name}"></td>
-                <td th:text="${client.case_description}"></td>
-                <td th:text="${client.phone_number}"></td>
-                <td th:text="${client.username}"></td>
                 <td th:text="${client.password}"></td>
+                <td th:text="${client.roles }"></td>
                 <td><a th:href="@{client-update/{id}(id=${client.id})}">Edit</a></td>
                 <td><a th:href="@{client-delete/{id}(id=${client.id})}">Delete</a></td>
             </tr>

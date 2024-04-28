@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -36,16 +37,23 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
+                        authorize
+                                .requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
-                                .requestMatchers("/users").hasRole("ADMIN")
-                                .requestMatchers("/invests").hasRole("ADMIN")
-                                .requestMatchers("**").hasRole("ADMIN")
+                                .requestMatchers("/css/**").permitAll()
+                                .requestMatchers("/images/**").permitAll()
+                                .requestMatchers("/my-invests").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/invest-create").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/invest-delete/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/invest-update/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/agents").hasAnyRole("USER", "ADMIN")
+                                .anyRequest().hasRole("ADMIN")
+
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/invests")
                                 .permitAll()
                 ).logout(
                         logout -> logout
@@ -54,6 +62,7 @@ public class SecurityConfig {
                 );
         return http.build();
     }
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

@@ -1,4 +1,5 @@
 package com.example.ParnellAgency.controllers;
+import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.models.User;
 import com.example.ParnellAgency.models.dto.UserDto;
 import com.example.ParnellAgency.services.UserService;
@@ -42,9 +43,9 @@ public class AuthController {
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
                                Model model){
-        User existingUser = userService.findUserByEmail(userDto.getEmail());
+        Client existingClient = userService.findClientByEmail(userDto.getEmail());
 
-        if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
+        if(existingClient != null && existingClient.getEmail() != null && !existingClient.getEmail().isEmpty()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
         }
@@ -53,13 +54,13 @@ public class AuthController {
             return "/register";
         }
 
-        userService.saveUser(userDto);
+        userService.saveClient(userDto);
         return "redirect:/register?success";
     }
 
     @GetMapping("/users")
     public String users(Model model){
-            List<UserDto> users = userService.findAllUsers();
+            List<UserDto> users = userService.findAllClients();
         model.addAttribute("users", users);
         return "index/users";
     }

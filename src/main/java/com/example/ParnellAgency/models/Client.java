@@ -10,10 +10,12 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_client")
-    private int id;
+    private Long id;
+    @Column(nullable=false)
     private String name;
-    private String case_description;
-    private String phone_number;
-    private String username;
+    @Column(nullable=false, unique=true)
+    private String email;
+    @Column(nullable=false)
     private String password;
+    private String roles;
 }

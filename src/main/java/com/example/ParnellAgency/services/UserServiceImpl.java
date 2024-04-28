@@ -1,7 +1,9 @@
 package com.example.ParnellAgency.services;
 
+import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.models.User;
 import com.example.ParnellAgency.models.dto.UserDto;
+import com.example.ParnellAgency.repositories.ClientRepository;
 import com.example.ParnellAgency.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,38 +15,39 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService{
-    private UserRepository userRepository;
+    private ClientRepository clientRepository;
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(UserDto userDto) {
-        User user = new User();
-        user.setRoles("ROLE_ADMIN");
-        user.setName(userDto.getFirstName() + " " + userDto.getLastName());
-        user.setEmail(userDto.getEmail());
+    public void saveClient(UserDto userDto) {
+        Client client = new Client();
+        client.setName(userDto.getFirstName() + " " + userDto.getLastName());
+        client.setEmail(userDto.getEmail());
         // encrypt the password using spring security
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        userRepository.save(user);
+        client.setRoles(userDto.getRoles());
+        client.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        clientRepository.save(client);
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Client findClientByEmail(String email) {
+        return clientRepository.findByEmail(email);
     }
 
     @Override
-    public List<UserDto> findAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
-                .map((user) -> mapToUserDto(user))
+    public List<UserDto> findAllClients() {
+        List<Client> clients = clientRepository.findAll();
+        return clients.stream()
+                .map((client) -> mapToUserDto(client))
                 .collect(Collectors.toList());
     }
-    private UserDto mapToUserDto(User user){
+    private UserDto mapToUserDto(Client client){
         UserDto userDto = new UserDto();
-        String[] str = user.getName().split(" ");
+        String[] str = client.getName().split(" ");
         userDto.setFirstName(str[0]);
         userDto.setLastName(str[1]);
-        userDto.setEmail(user.getEmail());
+        userDto.setEmail(client.getEmail());
+        userDto.setRoles(client.getRoles());
         return userDto;
     }
 }

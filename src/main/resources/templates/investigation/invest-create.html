@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Create client</title>
-    <link rel="stylesheet" href="../form.css">
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
+<p th:text="${client.id}"></p>
 <form action="#" th:action="@{/invest-create}" th:object="${investigation}" method="post">
     <label for="specification">Specification</label>
     <textarea id="specification" th:field="*{specification}" rows="10" cols="60" placeholder="Specification"></textarea>
     <label for="client">Client ID</label>
-    <input type="text" th:field="*{client.id}" id="client" placeholder="Client id">
+    <input type="text" th:value=${client.id}  th:attr="name='client.id'" id="client" placeholder="Client id" readonly>
     <select th:field="*{status}" id="status">
         <option value="OPEN">OPEN</option>
         <option value="CLOSED">CLOSED</option>

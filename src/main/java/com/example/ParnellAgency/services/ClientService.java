@@ -3,6 +3,8 @@ package com.example.ParnellAgency.services;
 import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.repositories.ClientRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,5 +34,9 @@ public class ClientService {
     public Iterable<Client> findByName(String name) {
 //        return clientRepository.searchByFields(searchValue);
         return clientRepository.findByNameContaining(name);
+    }
+
+    public Client findByEmail(String email) {
+        return clientRepository.findByEmail(email);
     }
 }

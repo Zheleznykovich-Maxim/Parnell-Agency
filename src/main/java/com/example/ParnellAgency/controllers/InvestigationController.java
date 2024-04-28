@@ -1,12 +1,19 @@
 package com.example.ParnellAgency.controllers;
 
+import com.example.ParnellAgency.config.MyUserDetails;
 import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.models.Investigation;
+import com.example.ParnellAgency.services.ClientService;
 import com.example.ParnellAgency.services.InvestigationService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -17,17 +24,25 @@ import java.util.List;
 @AllArgsConstructor
 public class InvestigationController {
     private final InvestigationService investigationService;
-
+    private final ClientService clientService;
     @GetMapping("/invests")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String findAll(Model model) {
         List<Investigation> investigationList = (List<Investigation>) investigationService.findAll();
         model.addAttribute("invests", investigationList);
         return "investigation/invest-index";
     }
+    @GetMapping("/my-invests")
+    public String findMyInvests(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Client client = clientService.findByEmail(userDetails.getUsername());
+        List<Investigation> investigationList = (List<Investigation>) investigationService.findByClientId(client.getId());
+        model.addAttribute("invests", investigationList);
+        return "investigation/invest-index";
+    }
 
     @GetMapping("/invest-create")
-    private String createInvestigationForm(Investigation investigation) {
+    private String createInvestigationForm(@AuthenticationPrincipal UserDetails userDetails, Investigation investigation, Model model) {
+        Client client = clientService.findByEmail(userDetails.getUsername());
+        model.addAttribute("client", client);
         return "investigation/invest-create";
     }
 

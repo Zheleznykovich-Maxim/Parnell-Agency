@@ -1,5 +1,6 @@
 package com.example.ParnellAgency.config;
 
+import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,25 +12,33 @@ import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
 
-    private User user;
-    public MyUserDetails(User user) {
-        this.user = user;
+    private Client client;
+    public MyUserDetails(Client client) {
+        this.client = client;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(user.getRoles().split(", "))
+        return Arrays.stream(client.getRoles().split(", "))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return client.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getPassword();
+        return client.getPassword();
     }
 
     @Override

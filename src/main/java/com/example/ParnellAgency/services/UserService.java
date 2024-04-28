@@ -1,14 +1,15 @@
 package com.example.ParnellAgency.services;
 
+import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.models.User;
 import com.example.ParnellAgency.models.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
-    void saveUser(UserDto userDto);
+    void saveClient(UserDto userDto);
 
-    User findUserByEmail(String email);
+    Client findClientByEmail(String email);
 
-    List<UserDto> findAllUsers();
+    List<UserDto> findAllClients();
 }

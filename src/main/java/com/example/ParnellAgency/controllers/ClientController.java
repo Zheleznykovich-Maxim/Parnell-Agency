@@ -18,7 +18,6 @@ import java.util.List;
 public class ClientController {
     private final ClientService clientService;
     @GetMapping("/clients")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String findAll(Model model) {
         List<Client> clients = (List<Client>) clientService.findAll();
         model.addAttribute("clients", clients);

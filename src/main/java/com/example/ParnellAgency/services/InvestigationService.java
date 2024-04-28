@@ -32,4 +32,8 @@ public class InvestigationService {
     public Iterable<Investigation> search(String searchValue) {
         return  investigationRepository.searchByFields(searchValue);
     }
+
+    public Iterable<Investigation> findByClientId(Long clientId) {
+        return investigationRepository.findByClientId(clientId);
+    }
 }
