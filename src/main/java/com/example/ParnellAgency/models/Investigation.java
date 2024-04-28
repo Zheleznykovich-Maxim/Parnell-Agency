@@ -14,11 +14,11 @@ public class Investigation {
     private int id;
     private String specification;
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private StatusType status;
 
     @ManyToOne
-    @JoinColumn(name = "ID_client")
+    @JoinColumn(name = "ID_client", nullable = false)
     private Client client;
 
     @OneToOne(mappedBy = "investigation", cascade = CascadeType.ALL)

@@ -1,9 +1,13 @@
 package com.example.ParnellAgency.controllers;
 
+import com.example.ParnellAgency.models.Agent;
 import com.example.ParnellAgency.models.AgentInvestigation;
 import com.example.ParnellAgency.models.Client;
+import com.example.ParnellAgency.models.Investigation;
 import com.example.ParnellAgency.services.AgentInvestigationService;
+import com.example.ParnellAgency.services.AgentService;
 import com.example.ParnellAgency.services.ClientService;
+import com.example.ParnellAgency.services.InvestigationService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,8 @@ import java.util.List;
 @AllArgsConstructor
 public class AgentInvestigationController {
     private final AgentInvestigationService agentInvestigationService;
+    private final AgentService agentService;
+    private final InvestigationService investigationService;
     @GetMapping("/agent-invests")
     public String findAll(Model model) {
         List<AgentInvestigation> agentInvestigations = (List<AgentInvestigation>) agentInvestigationService.findAll();
@@ -27,7 +33,11 @@ public class AgentInvestigationController {
     }
 
     @GetMapping("/agent-invest-create")
-    public String createAgentInvestigationForm(AgentInvestigation agentInvestigation) {
+    public String createAgentInvestigationForm(AgentInvestigation agentInvestigation, Model model) {
+        List<Agent> agents = (List<Agent>) agentService.findAll();
+        List<Investigation> investigationList = (List<Investigation>) investigationService.findAll();
+        model.addAttribute("agents", agents);
+        model.addAttribute("investigations", investigationList);
         return "agent-invest/agent-invest-create";
     }
 
@@ -41,6 +51,10 @@ public class AgentInvestigationController {
     public String updateAgentInvestigationForm(@PathVariable("id") int id, Model model) {
         AgentInvestigation agentInvestigation = agentInvestigationService.findById(id);
         model.addAttribute("agentInvestigation", agentInvestigation);
+        List<Agent> agents = (List<Agent>) agentService.findAll();
+        List<Investigation> investigationList = (List<Investigation>) investigationService.findAll();
+        model.addAttribute("agents", agents);
+        model.addAttribute("investigations", investigationList);
         return "agent-invest/agent-invest-update";
     }
 

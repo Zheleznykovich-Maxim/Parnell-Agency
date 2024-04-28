@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Update agent-investigation</title>
-    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="../css/form.css">
 </head>
 <body>
 <form action="#" th:action="@{/agent-invest-update}" th:object="${agentInvestigation}" method="post">
     <label for="ID_agent_investigation">ID</label>
     <input readonly type="number" th:field="*{ID_agent_investigation}" id="ID_agent_investigation" placeholder="ID">
     <label for="ID_agent">Agent ID</label>
-    <input type="number" th:field="*{agent.ID_agent}" id="ID_agent" placeholder="Agent ID">
+    <select th:field="*{agent}" id="ID_agent">
+        <option th:each="agent : ${agents}" th:value="${agent.ID_agent}" th:text="${agent.ID_agent}"></option>
+    </select>
+<!--    <input type="number" th:field="*{agent.ID_agent}" id="ID_agent" placeholder="Agent ID">-->
     <label for="ID_investigation">Investigation ID</label>
-    <input type="number" th:field="*{investigation.id}" id="ID_investigation" placeholder="Investigation ID">
+    <select th:field="*{investigation}" id="ID_investigation">
+        <option th:each="investigation : ${investigations}" th:value="${investigation.id}" th:text="${investigation.id}"></option>
+    </select>
+<!--    <input type="number" th:field="*{investigation.id}" id="ID_investigation" placeholder="Investigation ID">-->
     <input type="submit" value="Update agent-investigation">
 </form>
 </body>

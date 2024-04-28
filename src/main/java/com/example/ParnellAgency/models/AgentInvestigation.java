@@ -13,10 +13,10 @@ public class AgentInvestigation {
     private int ID_agent_investigation;
 
     @ManyToOne
-    @JoinColumn(name = "ID_investigation")
+    @JoinColumn(name = "ID_investigation", nullable = false)
     private Investigation investigation;
 
     @ManyToOne
-    @JoinColumn(name = "ID_agent")
+    @JoinColumn(name = "ID_agent", nullable = false)
     private Agent agent;
 }

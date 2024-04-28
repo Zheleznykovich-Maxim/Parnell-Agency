@@ -4,15 +4,20 @@ import com.example.ParnellAgency.models.Agent;
 import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.services.AgentService;
 import com.example.ParnellAgency.services.ClientService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -31,9 +36,14 @@ public class AgentController {
     }
 
     @PostMapping("/agent-create")
-    public String createAgent(Agent agent) {
+    public String createAgent(@Valid Agent agent, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "agent/agent-create";
+        }
         agentService.createAgent(agent);
         return "redirect:/agents";
+
     }
 
     @GetMapping("/agent-update/{id}")
@@ -44,7 +54,11 @@ public class AgentController {
     }
 
     @PostMapping("/agent-update")
-    public String updateAgent(Agent agent) {
+    public String updateAgent(@Valid Agent agent, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "agent/agent-update";
+        }
         agentService.createAgent(agent);
         return "redirect:/agents";
     }

@@ -36,6 +36,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
+
                 .authorizeHttpRequests((authorize) ->
                         authorize
                                 .requestMatchers("/register/**").permitAll()
@@ -46,6 +47,7 @@ public class SecurityConfig {
                                 .requestMatchers("/invest-create").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/invest-delete/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/invest-update/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/invest-search/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/agents").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().hasRole("ADMIN")
 
@@ -53,7 +55,7 @@ public class SecurityConfig {
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/invests")
+                                .defaultSuccessUrl("/my-invests")
                                 .permitAll()
                 ).logout(
                         logout -> logout
@@ -70,4 +72,5 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
+
 }

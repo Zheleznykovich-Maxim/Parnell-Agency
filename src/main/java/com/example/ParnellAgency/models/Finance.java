@@ -17,25 +17,20 @@ public class Finance {
     @Id
     @Column(name = "ID_investigation")
     private int id;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    @Column(nullable=false)
     private int case_cost;
     @Enumerated(EnumType.STRING)
+    @Column(nullable=false)
     private PaymentMethod payment_method;
+    @Column(nullable=false)
     private String recipient_account;
     @Enumerated(EnumType.STRING)
+    @Column(nullable=false)
     private PaymentStatus payment_status;
-
     @OneToOne
     @MapsId
-    @JoinColumn(name = "investigation_id")
+    @JoinColumn(name = "investigation_id", nullable = false)
     private Investigation investigation;
 
-
-    @PrePersist
-    protected void onCreate() {
-        date = new Date();
-    }
 
 }

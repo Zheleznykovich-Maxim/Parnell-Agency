@@ -51,7 +51,7 @@ public class AuthController {
         }
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
-            return "/register";
+            return "index/register";
         }
 
         userService.saveClient(userDto);

@@ -22,7 +22,6 @@
             <tr>
                 <th>Id</th>
                 <th>Case cost</th>
-                <th>Date</th>
                 <th>Payment method</th>
                 <th>Payment status</th>
                 <th>Recipient account</th>
@@ -32,7 +31,6 @@
             <tr th:each="fin : ${finance}">
                 <td th:text="${fin.id}"></td>
                 <td th:text="${fin.case_cost}"></td>
-                <td th:text="${fin.date}"></td>
                 <td th:text="${fin.payment_method}"></td>
                 <td th:text="${fin.payment_status}"></td>
                 <td th:text="${fin.recipient_account}"></td>

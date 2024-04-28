@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Create client</title>
-    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="../css/form.css">
 </head>
 <body>
-ХУЙ
 <form action="#" th:action="@{/invest-update}" th:object="${investigation}" method="post">
     <label for="id">ID</label>
     <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">

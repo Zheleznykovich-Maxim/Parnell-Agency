@@ -49,7 +49,7 @@ public class InvestigationController {
     @PostMapping("/invest-create")
     private String createInvest(Investigation investigation) {
         investigationService.createInvestigation(investigation);
-        return "redirect:/invests";
+        return "redirect:/my-invests";
     }
 
     @GetMapping("/invest-update/{id}")
@@ -62,13 +62,13 @@ public class InvestigationController {
     @PostMapping("/invest-update")
     public String updateInvestigation(Investigation investigation) {
         investigationService.createInvestigation(investigation);
-        return "redirect:/invests";
+        return "redirect:/my-invests";
     }
 
     @GetMapping("/invest-delete/{id}")
     public String deleteInvest(@PathVariable("id") int id) {
         investigationService.deleteById(id);
-        return "redirect:/invests";
+        return "redirect:/my-invests";
     }
 
     @GetMapping("/invest-search")

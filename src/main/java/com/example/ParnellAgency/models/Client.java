@@ -1,6 +1,10 @@
 package com.example.ParnellAgency.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -11,11 +15,15 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_client")
     private Long id;
-    @Column(nullable=false)
+    @NotNull
+    @Size(min = 3, max = 60)
     private String name;
-    @Column(nullable=false, unique=true)
+    @NotNull
+    @Column(unique=true)
+    @Email
     private String email;
-    @Column(nullable=false)
+    @NotNull
     private String password;
+    @NotNull
     private String roles;
 }
