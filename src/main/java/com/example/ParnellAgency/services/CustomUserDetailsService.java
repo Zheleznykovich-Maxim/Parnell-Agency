@@ -3,10 +3,6 @@ package com.example.ParnellAgency.services;
 import com.example.ParnellAgency.config.MyUserDetails;
 import com.example.ParnellAgency.models.Client;
 import com.example.ParnellAgency.repositories.ClientRepository;
-import com.example.ParnellAgency.repositories.UserRepository;
-
-import com.example.ParnellAgency.models.User;
-import com.example.ParnellAgency.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

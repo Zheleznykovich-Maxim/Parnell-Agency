@@ -1,6 +1,5 @@
 package com.example.ParnellAgency.controllers;
 import com.example.ParnellAgency.models.Client;
-import com.example.ParnellAgency.models.User;
 import com.example.ParnellAgency.models.dto.UserDto;
 import com.example.ParnellAgency.services.UserService;
 import jakarta.validation.Valid;

@@ -1,10 +1,8 @@
 package com.example.ParnellAgency.services;
 
 import com.example.ParnellAgency.models.Client;
-import com.example.ParnellAgency.models.User;
 import com.example.ParnellAgency.models.dto.UserDto;
 import com.example.ParnellAgency.repositories.ClientRepository;
-import com.example.ParnellAgency.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

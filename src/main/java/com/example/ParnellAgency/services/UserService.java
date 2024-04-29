@@ -1,7 +1,6 @@
 package com.example.ParnellAgency.services;
 
 import com.example.ParnellAgency.models.Client;
-import com.example.ParnellAgency.models.User;
 import com.example.ParnellAgency.models.dto.UserDto;
 
 import java.util.List;

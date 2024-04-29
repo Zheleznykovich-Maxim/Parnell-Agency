@@ -1,7 +1,6 @@
 package com.example.ParnellAgency.config;
 
 import com.example.ParnellAgency.models.Client;
-import com.example.ParnellAgency.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
